@@ -1,7 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
+
+var dictionary = []string{
+	"Jeyhun",
+	"Rahimli",
+	"Gopher",
+	"Golang",
+	"Docker",
+	"Kubernates",
+	"AWS",
+	"Cloud Computing",
+}
 
 func main() {
-	fmt.Println("hello world")
+	targetWord := getRandomWord()
+
+	fmt.Println(targetWord)
+}
+
+func getRandomWord() string {
+	return dictionary[rand.Intn(len(dictionary))]
 }
