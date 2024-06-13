@@ -24,13 +24,20 @@ var dictionary = []string{
 func main() {
 	targetWord := getRandomWord()
 	guessedLetters := initializeGuessedWord(targetWord)
-	hungmanState := 0
+	hangmanState := 0
 	for {
-		printGameState(targetWord, guessedLetters, hungmanState)
+		printGameState(targetWord, guessedLetters, hangmanState)
 		input := readInput()
 		if len(input) > 1 {
 			fmt.Println("Invalid input. Please use letters only ...")
 			continue
+		}
+
+		letter := rune(input[0])
+		if isGuessCorrect(targetWord, letter) {
+			guessedLetters[letter] = true
+		} else {
+			hangmanState++
 		}
 	}
 
@@ -86,4 +93,8 @@ func readInput() string {
 	}
 
 	return strings.TrimSpace(input)
+}
+
+func isGuessCorrect(targetWord string, letter rune) bool {
+	return strings.ContainsRune(targetWord, letter)
 }
