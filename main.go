@@ -42,7 +42,8 @@ func main() {
 		}
 	}
 
-	fmt.Println("Game over ...")
+	printGameState(targetWord, guessedLetters, hangmanState)
+	fmt.Print("Game over ... ")
 	if isWordGuessed(targetWord, guessedLetters) {
 		fmt.Println("You win!")
 	} else if isHangmanComplete(hangmanState) {
@@ -118,7 +119,7 @@ func gameOver(targetWord string, guessedLetters map[rune]bool, hamgmanState int)
 
 func isWordGuessed(targetWord string, guessedLetters map[rune]bool) bool {
 	for _, char := range targetWord {
-		if !guessedLetters[char] {
+		if !guessedLetters[unicode.ToLower(char)] {
 			return false
 		}
 	}
